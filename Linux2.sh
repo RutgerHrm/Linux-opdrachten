@@ -1,4 +1,5 @@
 #!/bin/bash
+#Rutger Harmers, ITV2i
 
 cd ~/Pictures
 
