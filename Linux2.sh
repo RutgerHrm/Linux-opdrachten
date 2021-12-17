@@ -1,18 +1,51 @@
 #!/bin/bash
 
-echo -e "Weet je zeker dat je je foto's wilt verplaatsen? (J om door te gaan)"
-read antwoord
+cd ~/Pictures
 
-if [[ $antwoord != [Jj]* ]]  ; then
-    echo "Oke, doei."
-    exit
-fi
+fotos=(*.jpg)
+alles=${#fotos[@]}
+dag=$(date -d 'now-1 day' +%s)
+week=$(date -d 'now- 7 days' +%s)
+maand=$(date -d 'now- 30 days' +%s)
+nu=$(date -r "$fotos" +%s)
 
-echo -e "In welke directory staan de foto's?"
-read directory
-echo -e "Welke maand?"
-read maand
+for f in alles;
+do
+        echo -e "Weet je zeker dat je je foto's wilt verplaatsen? (J om door te gaan)"
+        read antwoord
+        if [[ $antwoord != [Jj]* ]]  ; then
+          echo "Oke, doei."
+          exit
+        fi
 
-echo "Foto's verplaatsen..."
+        if [[ -n $fotos ]]; then
+                echo "File in directory."
+                echo "Sorteren op week (Ww) of maand (Mm)?"
+                read tijd
 
-mkdir "./$maand"
+                if [[ $tijd == [Ww]* ]]; then
+                        if (( nu <= dag )); then
+                                mkdir $(date +%V)
+                                cp $fotos $(date +%V)
+                                echo "Foto's verplaatsen..."
+
+                        else
+                                echo "Geen .jpg ouder dan een week in de directory"
+                        fi
+
+                elif [[ $tijd == [Mm]* ]]; then
+                        if (( nu <= jaar )); then
+                                mkdir $(date +%Y)
+                                cp $fotos $(date +%Y)
+                                echo "Foto's verplaatsen..."
+                        else
+                                echo "Geen .jpg ouder dan een maand in de directory"
+                        fi
+               fi
+
+
+        else
+                echo "Geen .jpg gevonden."
+        fi
+
+done
