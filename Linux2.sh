@@ -34,9 +34,9 @@ do
                         fi
 
                 elif [[ $tijd == [Mm]* ]]; then
-                        if (( nu <= jaar )); then
-                                mkdir $(date +%Y)
-                                cp $fotos $(date +%Y)
+                        if (( nu <= maand )); then
+                                mkdir $(date +%B)
+                                cp $fotos $(date +%B)
                                 echo "Foto's verplaatsen..."
                         else
                                 echo "Geen .jpg ouder dan een maand in de directory"
