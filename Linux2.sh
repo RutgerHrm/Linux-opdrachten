@@ -5,10 +5,10 @@ cd ~/Pictures
 
 fotos=(*.jpg)
 alles=${#fotos[@]}
+nu=$(date -r "$fotos" +%s)
 dag=$(date -d 'now-1 day' +%s)
 week=$(date -d 'now- 7 days' +%s)
 maand=$(date -d 'now- 30 days' +%s)
-nu=$(date -r "$fotos" +%s)
 
 for f in alles;
 do
